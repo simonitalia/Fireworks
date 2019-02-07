@@ -363,10 +363,6 @@ class GameScene: SKScene {
         self.view?.presentScene(nextScene, transition: SKTransition.fade(with: UIColor.black, duration: 1.5))
         
     }
-
-        
-
-    
     
 }
 

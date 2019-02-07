@@ -120,88 +120,74 @@ class GameScene: SKScene {
     
     @objc func launchFireworks() {
         
+        //Defend against false positive function call in case/s where game has ended
         if gameEnded {
             return
         }
         
-        let xAmount: CGFloat = 1800
-        let yAmount: CGFloat = 1000
-        
-        switch Int.random(in: 0...4) {
-        case 0:
-            // fire five, straight up
-            createFirework(xMovement: 0, yMovement: yAmount, x: 512, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: yAmount, x: 512 - 200, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: yAmount, x: 512 - 100, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: yAmount, x: 512 + 100, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: yAmount, x: 512 + 200, y: bottomEdge)
-            
-        case 1:
-            // fire five, in a fan
-            createFirework(xMovement: 0, yMovement: yAmount, x: 512, y: bottomEdge)
-            createFirework(xMovement: -200, yMovement: yAmount, x: 512 - 200, y: bottomEdge)
-            createFirework(xMovement: -100, yMovement: yAmount, x: 512 - 100, y: bottomEdge)
-            createFirework(xMovement: 100, yMovement: yAmount, x: 512 + 100, y: bottomEdge)
-            createFirework(xMovement: 200, yMovement: yAmount, x: 512 + 200, y: bottomEdge)
-            
-        case 2:
-            // fire five, from the left to the right
-            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 400)
-            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 300)
-            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 200)
-            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 100)
-            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge)
-            
-        case 3:
-            // fire five, from the right to the left
-            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 400)
-            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 300)
-            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 200)
-            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 100)
-            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge)
-            
-        case 4:
-            //fire five, straight down
-            createFirework(xMovement: 0, yMovement: -yAmount, x: 512, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 - 200, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 - 100, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 + 100, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 + 200, y: topEdge)
-            
-        default:
-            break
-
-        }//End switch statement
-        
-        //Track gamTimer fires
-        gameTimerCount += 1
-        print("Game timer fire/s: \(gameTimerCount)")
-        
-        //Stop gameTimer after X fires
-        if gameTimerCount == 10 {
-            gameTimer.invalidate()
+        //Trigger end of game after X timer fires
+        if gameTimerCount == 4 {
             gameEnded = true
-            print("Game timer stopped")
-        }
+            endGame()
         
-//        Call method to check if timer should continue or be stopped
-//        gameTimerFires(gameTimer)
+        } else {
+        
+            let xAmount: CGFloat = 1800
+            let yAmount: CGFloat = 1000
+            
+            switch Int.random(in: 0...4) {
+            case 0:
+                // fire five, straight up
+                createFirework(xMovement: 0, yMovement: yAmount, x: 512, y: bottomEdge)
+                createFirework(xMovement: 0, yMovement: yAmount, x: 512 - 200, y: bottomEdge)
+                createFirework(xMovement: 0, yMovement: yAmount, x: 512 - 100, y: bottomEdge)
+                createFirework(xMovement: 0, yMovement: yAmount, x: 512 + 100, y: bottomEdge)
+                createFirework(xMovement: 0, yMovement: yAmount, x: 512 + 200, y: bottomEdge)
+                
+            case 1:
+                // fire five, in a fan
+                createFirework(xMovement: 0, yMovement: yAmount, x: 512, y: bottomEdge)
+                createFirework(xMovement: -200, yMovement: yAmount, x: 512 - 200, y: bottomEdge)
+                createFirework(xMovement: -100, yMovement: yAmount, x: 512 - 100, y: bottomEdge)
+                createFirework(xMovement: 100, yMovement: yAmount, x: 512 + 100, y: bottomEdge)
+                createFirework(xMovement: 200, yMovement: yAmount, x: 512 + 200, y: bottomEdge)
+                
+            case 2:
+                // fire five, from the left to the right
+                createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 400)
+                createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 300)
+                createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 200)
+                createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 100)
+                createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge)
+                
+            case 3:
+                // fire five, from the right to the left
+                createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 400)
+                createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 300)
+                createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 200)
+                createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 100)
+                createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge)
+                
+            case 4:
+                //fire five, straight down
+                createFirework(xMovement: 0, yMovement: -yAmount, x: 512, y: topEdge)
+                createFirework(xMovement: 0, yMovement: -yAmount, x: 512 - 200, y: topEdge)
+                createFirework(xMovement: 0, yMovement: -yAmount, x: 512 - 100, y: topEdge)
+                createFirework(xMovement: 0, yMovement: -yAmount, x: 512 + 100, y: topEdge)
+                createFirework(xMovement: 0, yMovement: -yAmount, x: 512 + 200, y: topEdge)
+                
+            default:
+                break
+
+            }//End switch statement
+            
+            //Update number of timer fires
+            gameTimerCount += 1
+            print("Game timer fires: \(gameTimerCount)")
+            
+        }//End ifElse block
         
     }//End launchFireworks() method
-    
-//    Method to track how many times the gameTimer has fired, stop after X fires
-//    func gameTimerFires(_ gameTimer: Timer) {
-//
-//        if gameTimerCount < 3 {
-//        gameTimerCount += 1
-//          print("Game timer fire/s: \(gameTimerCount)")
-//
-//        //Stop timer
-//        } else {
-//            gameTimer.invalidate()
-//            print("Game timer stopped")
-//        }
-//    }
     
     //MARK: - Swipe to select methods
     
@@ -329,9 +315,41 @@ class GameScene: SKScene {
     //Handle endGame
     func endGame() {
         
+        //Defend against false positive function call
+        if !gameEnded {
+            return
+        }
+    
+        gameTimer.invalidate()
+        print("Game timer stopped")
+        
+        //Stop all screen activity and disable player inputs
+        isUserInteractionEnabled = false
+        
+        //Display gameOver image
+        let gameOver = SKSpriteNode(imageNamed: "gameOver")
+        gameOver.position = CGPoint(x: 512, y: 384)
+        gameOver.zPosition = 1
+        addChild(gameOver)
+        
+        //Trigger end of game alert
         
         
     }
+    
+    func restartGame() {
+        
+        gameEnded = false
+        
+        let nextScene = GameScene(size: self.scene!.size)
+        nextScene.scaleMode = self.scaleMode
+        nextScene.backgroundColor = UIColor.black
+        self.view?.presentScene(nextScene, transition: SKTransition.fade(with: UIColor.black, duration: 1.5))
+        
+    }
+
+        
+
     
     
 }

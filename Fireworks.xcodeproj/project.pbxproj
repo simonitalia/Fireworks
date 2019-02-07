@@ -21,6 +21,7 @@
 		2A10B8E722082B080010B093 /* explode.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2A10B8E022082B080010B093 /* explode.sks */; };
 		2A10B8E822082B080010B093 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A10B8E122082B080010B093 /* background@2x.png */; };
 		2A10B8E922082B080010B093 /* rocket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A10B8E222082B080010B093 /* rocket@2x.png */; };
+		2AEE429D220BF4C50021D965 /* gameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AEE429C220BF4C50021D965 /* gameOver.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2A10B8E022082B080010B093 /* explode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explode.sks; sourceTree = "<group>"; };
 		2A10B8E122082B080010B093 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		2A10B8E222082B080010B093 /* rocket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rocket@2x.png"; sourceTree = "<group>"; };
+		2AEE429C220BF4C50021D965 /* gameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameOver.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		2A10B8DB22082B080010B093 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				2AEE429C220BF4C50021D965 /* gameOver.png */,
 				2A10B8DC22082B080010B093 /* spark.png */,
 				2A10B8DD22082B080010B093 /* background.png */,
 				2A10B8DE22082B080010B093 /* rocket.png */,
@@ -163,6 +166,7 @@
 				2A10B8E322082B080010B093 /* spark.png in Resources */,
 				2A10B8E622082B080010B093 /* fuse.sks in Resources */,
 				2A10B8E422082B080010B093 /* background.png in Resources */,
+				2AEE429D220BF4C50021D965 /* gameOver.png in Resources */,
 				2A10B8CF22081F100010B093 /* Main.storyboard in Resources */,
 				2A10B8E722082B080010B093 /* explode.sks in Resources */,
 				2A10B8C622081F100010B093 /* GameScene.sks in Resources */,

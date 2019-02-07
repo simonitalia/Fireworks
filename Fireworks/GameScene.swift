@@ -12,11 +12,15 @@ import GameplayKit
 class GameScene: SKScene {
     
     var gameTimer: Timer!
+    var gameTimerCount = 0
     var fireworks = [SKNode]()
     
+    // X axis off screen position properties
     let leftEdge = 0 - 22
-    let bottomEdge = 0 - 22
     let rightEdge = 1024 + 22
+    
+    // Y axis off screen position properties
+    let bottomEdge = 0 - 22
     let topEdge = 768 + 22
     
     var gameScore: SKLabelNode!
@@ -25,6 +29,8 @@ class GameScene: SKScene {
             gameScore.text = "Score: \(score)"
         }
     }
+    
+    var gameEnded = false
     
     override func didMove(to view: SKView) {
         
@@ -43,6 +49,7 @@ class GameScene: SKScene {
         
     }//End didMove() method
     
+    
     //Create gameScore label
     func createGameScore() {
         gameScore = SKLabelNode(fontNamed: "Chalkduster")
@@ -56,6 +63,8 @@ class GameScene: SKScene {
     
     //Create Fireworks and add to Scene
     func createFirework(xMovement: CGFloat, yMovement: CGFloat, x: Int, y: Int) {
+        //X = x axis start position, Y = y axis start position
+        //xMovement = move to position along X axis, yMovemenet = move to position along Y axis
         
         //1. Create parent SKNode / container to hold firework elements
         let firework = SKNode()
@@ -111,70 +120,88 @@ class GameScene: SKScene {
     
     @objc func launchFireworks() {
         
-        let movementAmount: CGFloat = 1800
+        if gameEnded {
+            return
+        }
+        
+        let xAmount: CGFloat = 1800
+        let yAmount: CGFloat = 1000
         
         switch Int.random(in: 0...4) {
         case 0:
             // fire five, straight up
-            createFirework(xMovement: 0, yMovement: 1000, x: 512, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: 1000, x: 512 - 200, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: 1000, x: 512 - 100, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: 1000, x: 512 + 100, y: bottomEdge)
-            createFirework(xMovement: 0, yMovement: 1000, x: 512 + 200, y: bottomEdge)
+            createFirework(xMovement: 0, yMovement: yAmount, x: 512, y: bottomEdge)
+            createFirework(xMovement: 0, yMovement: yAmount, x: 512 - 200, y: bottomEdge)
+            createFirework(xMovement: 0, yMovement: yAmount, x: 512 - 100, y: bottomEdge)
+            createFirework(xMovement: 0, yMovement: yAmount, x: 512 + 100, y: bottomEdge)
+            createFirework(xMovement: 0, yMovement: yAmount, x: 512 + 200, y: bottomEdge)
             
         case 1:
             // fire five, in a fan
-            createFirework(xMovement: 0, yMovement: 1000, x: 512, y: bottomEdge)
-            createFirework(xMovement: -200, yMovement: 1000, x: 512 - 200, y: bottomEdge)
-            createFirework(xMovement: -100, yMovement: 1000, x: 512 - 100, y: bottomEdge)
-            createFirework(xMovement: 100, yMovement: 1000, x: 512 + 100, y: bottomEdge)
-            createFirework(xMovement: 200, yMovement: 1000, x: 512 + 200, y: bottomEdge)
+            createFirework(xMovement: 0, yMovement: yAmount, x: 512, y: bottomEdge)
+            createFirework(xMovement: -200, yMovement: yAmount, x: 512 - 200, y: bottomEdge)
+            createFirework(xMovement: -100, yMovement: yAmount, x: 512 - 100, y: bottomEdge)
+            createFirework(xMovement: 100, yMovement: yAmount, x: 512 + 100, y: bottomEdge)
+            createFirework(xMovement: 200, yMovement: yAmount, x: 512 + 200, y: bottomEdge)
             
         case 2:
             // fire five, from the left to the right
-            createFirework(xMovement: movementAmount, yMovement: 1000, x: leftEdge, y: bottomEdge + 400)
-            createFirework(xMovement: movementAmount, yMovement: 1000, x: leftEdge, y: bottomEdge + 300)
-            createFirework(xMovement: movementAmount, yMovement: 1000, x: leftEdge, y: bottomEdge + 200)
-            createFirework(xMovement: movementAmount, yMovement: 1000, x: leftEdge, y: bottomEdge + 100)
-            createFirework(xMovement: movementAmount, yMovement: 1000, x: leftEdge, y: bottomEdge)
+            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 400)
+            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 300)
+            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 200)
+            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge + 100)
+            createFirework(xMovement: xAmount, yMovement: yAmount, x: leftEdge, y: bottomEdge)
             
         case 3:
             // fire five, from the right to the left
-            createFirework(xMovement: -movementAmount, yMovement: 1000, x: rightEdge, y: bottomEdge + 400)
-            createFirework(xMovement: -movementAmount, yMovement: 1000, x: rightEdge, y: bottomEdge + 300)
-            createFirework(xMovement: -movementAmount, yMovement: 1000, x: rightEdge, y: bottomEdge + 200)
-            createFirework(xMovement: -movementAmount, yMovement: 1000, x: rightEdge, y: bottomEdge + 100)
-            createFirework(xMovement: -movementAmount, yMovement: 1000, x: rightEdge, y: bottomEdge)
+            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 400)
+            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 300)
+            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 200)
+            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge + 100)
+            createFirework(xMovement: -xAmount, yMovement: yAmount, x: rightEdge, y: bottomEdge)
             
         case 4:
             //fire five, straight down
-            createFirework(xMovement: 0, yMovement: -1000, x: 512, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -1000, x: 512 - 200, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -1000, x: 512 - 100, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -1000, x: 512 + 100, y: topEdge)
-            createFirework(xMovement: 0, yMovement: -1000, x: 512 + 200, y: topEdge)
-            
-            
-        //case 5:
-            //fire 3 from left to right AND fire 2  from right to left
-            //3 left to right
-            
-            
-            //2 from right to left
-            
-            
-            
-            
-            
-            
-            
+            createFirework(xMovement: 0, yMovement: -yAmount, x: 512, y: topEdge)
+            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 - 200, y: topEdge)
+            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 - 100, y: topEdge)
+            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 + 100, y: topEdge)
+            createFirework(xMovement: 0, yMovement: -yAmount, x: 512 + 200, y: topEdge)
             
         default:
             break
 
         }//End switch statement
-
+        
+        //Track gamTimer fires
+        gameTimerCount += 1
+        print("Game timer fire/s: \(gameTimerCount)")
+        
+        //Stop gameTimer after X fires
+        if gameTimerCount == 10 {
+            gameTimer.invalidate()
+            gameEnded = true
+            print("Game timer stopped")
+        }
+        
+//        Call method to check if timer should continue or be stopped
+//        gameTimerFires(gameTimer)
+        
     }//End launchFireworks() method
+    
+//    Method to track how many times the gameTimer has fired, stop after X fires
+//    func gameTimerFires(_ gameTimer: Timer) {
+//
+//        if gameTimerCount < 3 {
+//        gameTimerCount += 1
+//          print("Game timer fire/s: \(gameTimerCount)")
+//
+//        //Stop timer
+//        } else {
+//            gameTimer.invalidate()
+//            print("Game timer stopped")
+//        }
+//    }
     
     //MARK: - Swipe to select methods
     
@@ -298,6 +325,14 @@ class GameScene: SKScene {
         }
         
     }//End explodeFireworks() method
+    
+    //Handle endGame
+    func endGame() {
+        
+        
+        
+    }
+    
     
 }
 

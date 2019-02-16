@@ -65,3 +65,5 @@ Some features included are not part of the guided project, but are added as stre
 # Completed
 February, 2019
 
+- <strong>Deployment Target (iOS version): </strong>9.3 and higher
+- <strong>Supported Devices: </strong>iPad
